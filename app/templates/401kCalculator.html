@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <style>
+        .btn btn-secondary {
+            width: 100%;
+            display: block;
+        }
+    
+        #cont-display {
+            text-align: center;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color:rgb(246,242,226)">
+    <div class="container-fluid p-0" style="width: 100%">
+        <nav class="navbar navbar-expand" style="background: rgb(21,56,102)">
+            <div class="container-fluid">
+                <img class="navbar-brand" src="{{ url_for('static', filename='img/logo.png') }}" alt="Advanced Capital Group" style="width:12.5%">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="/home" class="nav-link" style="color:rgb(222, 175, 37)"><h4>Home</h4></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/riskAnalysis" class="nav-link" style="color:rgb(222, 175, 37)"><h4>Risk Analysis</h4></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-4">
+                <h6 id="cont-display" style="color:rgb(21,56,102)">All Values are from the Period of {{ window }}</h6>
+                <h6 id="cont-display" style="color:rgb(21,56,102)">Currently Selected: {{ portfolio }}</h6>
+                <div class="container-fluid">
+                    <div class="row p-1">
+                        <div class="col">
+                            <form action="/401kCalculator" method="POST">
+                                <input type = 'submit' class = 'btn btn-secondary' name='submitButton' value="Flat 5% Rate of Return" style="width:100%">
+                            </form>
+                        </div>
+                        <div class="col" float="right">
+                            <form action="/401kCalculator" method="POST">
+                                <input type = 'submit' class = 'btn btn-secondary' name='submitButton' value="100% Equity Returns" style="width:100%">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col">
+                            <form action="/401kCalculator" method="POST">
+                                <input type = 'submit' class = 'btn btn-secondary' name='submitButton' value="100% Bond Returns" style="width:100%">
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form action="/401kCalculator" method="POST">
+                                <input type = 'submit' class = 'btn btn-secondary' name='submitButton' value="90% Equity, 10% Bonds" style="width:100%">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col">
+                            <form action="/401kCalculator" method="POST">
+                                <input type = 'submit' class = 'btn btn-secondary' name='submitButton' value="80% Equity, 20% Bonds" style="width:100%">
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form action="/401kCalculator" method="POST">
+                                <input type = 'submit' class = 'btn btn-secondary' name='submitButton' value="70% Equity, 30% Bonds" style="width:100%">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col">
+                            <form action="/401kCalculator" method="POST">
+                                <input type = 'submit' class = 'btn btn-secondary' name='submitButton' value="60% Equity, 40% Bonds" style="width:100%">
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form action="/401kCalculator" method="POST">
+                                <input type = 'submit' class = 'btn btn-secondary' name='submitButton' value="50% Equity, 50% Bonds" style="width:100%">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col">
+                            <form action="/401kCalculator" method="POST">
+                                <input type = 'submit' class = 'btn btn-secondary' name='submitButton' value="40% Equity, 60% Bonds" style="width:100%">
+                            </form>
+                        </div> 
+                        <div class="col">
+                            <form action="/401kCalculator" method="POST">
+                                <input type = 'submit' class = 'btn btn-secondary' name='submitButton' value="30% Equity, 70% Bonds" style="width:100%">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col">
+                            <form action="/401kCalculator" method="POST">
+                                <input type = 'submit' class = 'btn btn-secondary' name='submitButton' value="20% Equity, 80% Bonds" style="width:100%">
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form action="/401kCalculator" method="POST">
+                                <input type = 'submit' class = 'btn btn-secondary' name='submitButton' value="10% Equity, 90% Bonds" style="width:100%">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row m-2">
+                    <div class="col p-2">
+                        <!-- Button trigger modal -->
+                        <h4>Input Graph Parameters:</h4>
+                        <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#inputModal">
+                            Input Data
+                        </button>
+                        <h4>More Information on the Graph:</h4>
+                        <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#infoModal">
+                            Graph Breakdown
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <h3 id="cont-display" style="color:rgb(21,56,102)">Annual Withdrawal</h3>
+                <canvas id="myChart" width='1000' height="550"></canvas>
+                <script>
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    const myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                        labels: {{ tLabels }},
+                        datasets: [{
+                                label: '401(k)',
+                                data: {{ regVals | safe }},
+                                fill: false,
+                                borderColor: 'rgb(21,56,102)'
+                            },
+                            {
+                                label: 'Pension',
+                                data: {{ pension | safe }},
+                                fill: false,
+                                borderColor: 'rgb(0, 0, 0)'
+                            },
+                            {
+                                label: '401(k)+' + {{ minCont | safe }} + '% Employer Contribution',
+                                data: {{ minVals | safe }},
+                                fill: false,
+                                borderColor: 'rgb(244,206,31)'
+                            },
+                            {
+                                label: '401(k)+' + {{ maxCont | safe }} + '% Employer Contribution',
+                                data: {{ maxVals | safe }},
+                                fill: false,
+                                borderColor: 'rgb(9,119,185)'
+                            },
+                            {
+                                label: '401(k)+' + {{ magicNum | safe }} + '% Employer Contribution (Average of all Scenarios)',
+                                data: {{ magicVals | safe }},
+                                fill: false,
+                                borderColor: 'rgb(222, 175, 37)'
+                            },
+                            ]
+                        },
+                        options: {
+                            responsive: true
+                        }
+                    });
+                </script>
+                <div class="row">
+                    <div class="col">
+                        <h5 style="color:rgb(21,56,102)">Customized Return Values: {{ changedReturns }}</h5> 
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <!-- Modals -->
+    <div class="modal fade" id="inputModal" tabindex="-1" role="dialog" aria-labelledby="Input Modal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel">Input Data</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <form action="/401kCalculator" method = "POST">
+                                    <div class="form-group">
+                                        <label class="form-label">Starting Salary; Current: ${{ salary }}</label>
+                                        <div class="input-group">
+                                            <div class="input-group-text" style="border-top-right-radius:0%; border-bottom-right-radius: 0%">$</div>
+                                            <input class = 'form-control' type = "text" name = "Starting Salary" />
+                                            <div class="input-group-text" style="border-top-left-radius:0%; border-bottom-left-radius: 0%">.00</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Annual Raise (percent); Current: {{ payRaise }}%</label>
+                                        <div class="input-group">
+                                            <input class = 'form-control' type = "text" name = "Annual Raise" />
+                                            <div class="input-group-text" style="border-top-left-radius:0%; border-bottom-left-radius: 0%">%</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Annual 401(k) Contribution (percent); Current: {{ sr }}%</label>
+                                        <div class="input-group">
+                                            <input class = 'form-control' type = "text" name = "Saving Rate" />
+                                            <div class="input-group-text" style="border-top-left-radius:0%; border-bottom-left-radius: 0%">%</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Expected Rate of Return for 401(k); Current: {{ ror }}%</label>
+                                        <div class="input-group">
+                                            <input class = 'form-control' type = "text" name = "Rate of Return" />
+                                            <div class="input-group-text" style="border-top-left-radius:0%; border-bottom-left-radius: 0%">%</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Starting Age; Current: {{ age }}</label>
+                                        <div class="input-group">
+                                            <input class = 'form-control' type = "text" name = "Starting Age" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Rate of Withdrawal During Retirement; Current: {{ row }}%</label>
+                                        <div class="input-group">
+                                            <input class = 'form-control' type = "text" name = "Rate of Withdrawal" />
+                                            <div class="input-group-text" style="border-top-left-radius:0%; border-bottom-left-radius: 0%">%</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Starting Year for Return Window (eligable values: 1928-1987); Current: {{ start }}</label>
+                                        <input class = 'form-control' type = "text" name = "Starting Year" /></p>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label><h4>Specify the rate of return for a specific year</h4></label>
+                                        
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h6>Year</h6>
+                                            </div>
+                                            <div class="col-6">
+                                                <h6 class="float-right">Rate of Return</h6>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <input id="year" class='form-control' type="text" name="year" />
+                                            <input id="return" class = 'form-control' type = "text" name = "return" />
+                                            <div class="input-group-text" style="border-top-left-radius:0%; border-bottom-left-radius: 0%">%</div>
+                                        </div>
+                                    </div>
+                                    <button type='submit' class='btn btn-primary' name="submitButton" value="Calculate">Calculate</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary float-right" data-dismiss="modal" >Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="Info Modal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">How to Interpret the Graph</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row p-2">
+                        <div class="col-1" style="background-color:rgb(21,56,102); padding:4px; height:25px">
+                            <p> </p>
+                        </div>
+                        <div class="col">
+                            <h6>Basic 401k:</h6>
+                            <p style="font-size:13px" style="color:rgb(21,56,102)">Displays annual withdrawal for a 401(k) with an annual saving rate of <b>{{ sr }}%</b></p>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-1" style="background-color:rgb(0,0, 0); padding:4px; height:25px">
+                            <p> </p>
+                        </div>
+                        <div class="col">
+                            <h6>Pension:</h6>
+                            <p style="font-size:13px" style="color:rgb(21,56,102)">Displays annual value of a possible pension plan</p>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-1" style="background-color:rgb(244,206,31); padding:4px; height:25px">
+                            <p> </p>
+                        </div>
+                        <div class="col">
+                            <h6>Best Case Scenario:</h6>
+                            <p style="font-size:13px" style="color:rgb(21,56,102)">Displays annual withdrawal for the base 401(k) plus an additional <b>{{ minCont }}%</b>, with standard deviation <b>{{ minStdDev }}%</b>, contributed by the employer. <b>{{ minCont }}%</b> is the average employer contribution required to equate the 401(k) to the pension plan, based off a portfolio consisting of <b>{{ minPortfolio }}</b></p>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-1" style="background-color:rgb(9,119,185); padding:4px; height:25px">
+                            <p> </p>
+                        </div>
+                        <div class="col">
+                            <h6>Worst Case Scenario:</h6>
+                            <p style="font-size:13px" style="color:rgb(21,56,102)">Displays annual withdrawal for the base 401(k) plus an additional <b>{{ maxCont }}%</b>, with standard deviation <b>{{ maxStdDev }}%</b>, contributed by the employer. <b>{{ maxCont }}%</b> is the average employer contribution required to equate the 401(k) to the pension plan, based off a portfolio consisting of <b>{{ maxPortfolio }}</b></p>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-1" style="background-color:rgb(222, 175, 37); padding:4px; height:25px">
+                            <p> </p>
+                        </div>
+                        <div class="col">
+                            <h6>Average Scenario:</h6>
+                            <p style="font-size:13px" style="color:rgb(21,56,102)">Displays annual withdrawal for the base 401(k) plus an additional <b>{{ magicNum }}%</b> contributed by the employer. <b>{{ magicNum }}%</b> is the average employer contribution required to equate the 401(k) to the pension plan, based off <b>all possible portfolio weights</b></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>The best and worst case scenraios are calculated by finding the employer contribution required to equate the given 401k plan to the calculated 
+                        pension plan for every possible 35 year return window. This is done for each portfolio weighting. The values are then averaged and the best 
+                        case scenario(lowest employer contribution) and the worst case scenario(highest employer contribution) are picked. Finally the mean of all 
+                        calculated averages is calculated giving the average employer contribution to make the base 401k equal the pension.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary float-right" data-dismiss="modal" >Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
