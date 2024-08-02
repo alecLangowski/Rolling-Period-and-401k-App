@@ -45,9 +45,9 @@ def valueCreator(vals, total):
         return([0 for i in range(35)])
 
 # excel spreadsheet read-in initialization for risk analysis tool
-mutualFunds = fundGroup("MutualFundReturns.xlsx")
+mutualFunds = fundGroup("Rolling-Period-and-401k-App\MutualFundReturns.xlsx")
 fundNames = mutualFunds.fundNames
-indexes = fundGroup("IndexReturns.xlsx")
+indexes = fundGroup("Rolling-Period-and-401k-App\IndexReturns.xlsx")
 indexNames = indexes.fundNames
 
 """Webpage Routes"""
@@ -164,9 +164,9 @@ def riskAnalysis():
 
     """reportlab pdf creation"""
 
-    report = canvas.Canvas("app/report.pdf", pagesize=letter)
+    report = canvas.Canvas("Rolling-Period-and-401k-App/app/report.pdf", pagesize=letter)
     width, height = letter
-    report.drawInlineImage("app\static\img\pdfLogo.png", width-200, height-90, 200, 100)
+    report.drawInlineImage("Rolling-Period-and-401k-App/app/static/img/pdfLogo.png", width-200, height-90, 200, 100)
     report.setFontSize(11.5)
     report.drawString(15, height-20, fund)
     report.drawString(15, height-35, "Compared to")
@@ -302,7 +302,7 @@ def riskAnalysis():
 
     #Second Page Header
     report.showPage()
-    report.drawInlineImage("app\static\img\pdfLogo.png", width-200, height-90, 200, 100)
+    report.drawInlineImage("Rolling-Period-and-401k-App/app/static/img/pdfLogo.png", width-200, height-90, 200, 100)
     report.setFontSize(11.5)
     report.drawString(15, height-20, fund)
     report.drawString(15, height-35, "Compared to")
